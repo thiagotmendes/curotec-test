@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->enum('status', ['active', 'inactive', 'pending'])->default('pending');
+            $table->integer('priority')->default(0);
             $table->timestamps();
         });
     }
