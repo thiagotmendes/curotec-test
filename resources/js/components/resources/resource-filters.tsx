@@ -25,7 +25,7 @@ export function ResourceFilters({ initialFilters }: ResourceFiltersProps) {
         }, 500);
 
         return () => clearTimeout(timeout);
-    }, [data.status, data.priority, data.search]);
+    }, [data.status, data.priority, data.search, get]);
 
     return (
         <div className="flex flex-wrap gap-6">
