@@ -30,21 +30,21 @@ Table: `resources`
 ### 🛠️ Technical Stack
 
 #### Backend (Laravel)
-- API Resource for standardized responses
-- Controller with validation using `FormRequest`
-- Endpoints:
-    - `GET /resources`
-    - `POST /resources`
-    - `PUT /resources/{id}`
-    - `DELETE /resources/{id}`
+- [x] API Resource for standardized responses
+- [x] Controller with validation using `FormRequest`
+- [x] Endpoints:
+    - [x] `GET /resources`
+    - [x] `POST /resources`
+    - [x] `PUT /resources/{id}`
+    - [x] `DELETE /resources/{id}`
 
 #### Frontend (React + Inertia.js)
-- React Components:
-    - Resource list
-    - Create/Edit form
-    - Deletion confirmation modal
-- State management using `useState`, `useReducer`, or `Zustand`
-- `useForm` from Inertia.js for form handling with error propagation
+- [x] React Components:
+    - [x] Resource list
+    - [x] Create/Edit form
+    - [x] Deletion confirmation modal
+- [x] State management using `useState` and `useForm`
+- [x] `useForm` from Inertia.js for form handling with error propagation
 
 ---
 
@@ -65,21 +65,161 @@ Add advanced filters and pagination with server-side processing, keeping filters
 ### 🛠️ Technical Focus
 
 #### Backend (Laravel)
-- Query optimization using `eager loading`, `whereHas`, `scoped queries`
-- Pagination using `paginate()` while preserving filters
-- Inertia-formatted responses for frontend integration
+- [x] Query optimization using `when()` clauses and scoped queries
+- [x] Pagination using `paginate()` while preserving filters
+- [x] Inertia-formatted responses for frontend integration
 
 #### Frontend (React + Inertia.js)
-- Reusable components for:
-    - Dynamic filters (dropdowns, search bar)
-    - Pagination controls (current page, total pages)
-- URL state synchronization with `usePage().props`
-- Reusable filtering logic using custom hooks or context
+- [x] Reusable components for:
+    - [x] Dynamic filters (dropdowns, search bar)
+    - [x] Pagination controls (current page, total pages)
+- [x] URL state synchronization with `usePage().props`
+- [x] Reusable filtering logic using `useForm` hook
 
 ---
 
 ## 🚀 Next Steps
 
-- [ ] Implement `ResourceController` with filtering and pagination
-- [ ] Create React components for filters and pagination UI
-- [ ] Test integration and UX with large data sets
+- [x] Add unit tests for ResourceController
+- [x] Add frontend tests for components
+- [ ] Implement error boundary for better error handling
+- [ ] Add loading states for better UX
+- [ ] Consider implementing caching for better performance
+
+## 🛠️ Development Setup
+
+### Prerequisites
+- PHP 8.2+
+- Node.js 18+
+- Composer
+- MySQL/PostgreSQL
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd <project-directory>
+```
+
+2. Install PHP dependencies:
+```bash
+composer install
+```
+
+3. Install JavaScript dependencies:
+```bash
+npm install
+```
+
+4. Install testing dependencies:
+```bash
+npm install --save-dev @testing-library/react @testing-library/jest-dom @types/jest jest @babel/preset-react @babel/preset-typescript
+```
+
+5. Create environment file:
+```bash
+cp .env.example .env
+```
+
+6. Generate application key:
+```bash
+php artisan key:generate
+```
+
+7. Configure your database in `.env`:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+8. Run migrations and seeders:
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+9. Start the development servers:
+```bash
+# Terminal 1 - Laravel server
+php artisan serve
+
+# Terminal 2 - Vite server
+npm run dev
+```
+
+### Running Tests
+
+1. Run PHP tests:
+```bash
+php artisan test
+```
+
+2. Run specific PHP test file:
+```bash
+php artisan test tests/Unit/Http/Controllers/ResourceControllerTest.php
+```
+
+3. Run PHP tests with coverage:
+```bash
+php artisan test --coverage
+```
+
+4. Run JavaScript tests:
+```bash
+npm test
+```
+
+5. Run specific JavaScript test file:
+```bash
+npm test resources/js/tests/components/resources/resource-filters.test.tsx
+```
+
+6. Run JavaScript tests with coverage:
+```bash
+npm test -- --coverage
+```
+
+### Development Workflow
+
+1. Start the development servers
+2. Make your changes
+3. Run tests
+4. Commit your changes
+
+### Common Issues
+
+- If you encounter permission issues, run:
+```bash
+chmod -R 775 storage bootstrap/cache
+```
+
+- If you need to clear caches:
+```bash
+php artisan optimize:clear
+```
+
+- If you need to rebuild assets:
+```bash
+npm run build
+```
+
+- If tests are not running, check your Jest configuration in `package.json`:
+```json
+{
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom",
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/resources/js/$1"
+    },
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom"
+    ]
+  }
+}
+```
